@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Modern Business - Start Bootstrap Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{%  static 'css/bootstrap-rtl.css' %}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{%  static 'css/modern-business.css' %}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{%  static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+    <!-- <link href="{%  static 'css/account.css' %}" rel="stylesheet"> -->
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+ {% include 'partial/header.html'%}
+
+  <section class="bg-light py-5">
+    
+     <div class="container">
+      <div class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2" style="margin-top:50px;">
+
+          <div class="panel panel-primary" >
+            <div class="panel-heading">
+              <div class="panel-title">ورود</div>
+            </div>
+            
+            <div style="padding-top:30px" class="panel-body">
+                 <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
+               {% include 'partial/_alerts.html'%}
+               
+               <form  class="form-horizontal" role="form" action="{%url 'login'%}" method="POST" >
+                {% csrf_token%}
+                   <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                <input type="text" class="form-control " name="username" placeholder="نام کاربری"  required>
+                   </div>
+                  <div style="margin-bottom: 25px" class="input-group">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                <input type="password" class="form-control"name="Password" placeholder="گذرواژه"  required>
+                   </div>
+                    <div style="margin-top:10px" class="form-group">
+                                    <!-- Button -->
+
+                                    <div class="col-sm-12 controls">
+                                        <button type="submit" id="btn-login"  class="btn btn-success">ورود </button>
+                                      <a id="btn-fblogin" href="{%url 'PhoneLogin'%}" class="btn btn-primary">ورود با شماره همراه</a>
+
+                                    </div>
+                                </div>
+                   <div class="form-group">
+                                    <div class="col-md-12 control">
+                                        <div style="border-top: 1px solid#888; padding-top:15px; font-size:85%" >
+                                            عضونیستم
+                                        <a href="{%url 'register'%}" onClick="$('#loginbox').hide(); $('#signupbox').show()">
+                                            (عضویت)
+                                        </a>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+              </form>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </section>
+     <script src="{%  static 'js/jquery.js'%}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{%  static 'js/bootstrap.min.js'%}"></script>
+    <script src="{%  static 'js/jqBootstrapValidation.js'%}"></script>
+    <!-- Script to Activate the Carousel -->
+    <script>
+        $('.carousel').carousel({
+            interval: 5000 //changes the speed
+        })
+    </script>
+ <script>
+        setTimeout(function () {
+            $('#message').fadeOut('slow');
+        }, 3000);
+    </script>
+</body>
+</html>
+
+
+ 

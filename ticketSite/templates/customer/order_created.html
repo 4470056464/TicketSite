@@ -1,0 +1,10 @@
+{%extends 'page/base.html'%}
+{% load static %}
+{% block content %}
+<h1>متشکر از خرید شما</h1>
+<p>شماره بلیط شما:  <strong>
+    {{order.id}}
+    <a href="{% url 'ticket_pdf' order.id%}">دریافت بلیط</a>
+</strong>
+</p>
+{% endblock %}
