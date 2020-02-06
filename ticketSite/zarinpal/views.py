@@ -14,8 +14,8 @@ client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
 # amount = 100  # Toman / Required
 description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
 email = 'email@example.com'  # Optional
-mobile = '09123456789'  # Optional
-CallbackURL = 'http://localhost:8000/verify/' # Important: need to edit for realy server#
+mobile = '09135290676'  # Optional
+CallbackURL = 'http://127.0.0.1:8000/zarinpal/verify/' # Important: need to edit for realy server#
 
 def send_request(request):
     order_id=request.session.get('order_id')
@@ -28,13 +28,14 @@ def send_request(request):
         return HttpResponse('Error code: ' + str(result.Status))
 
 def verify(request):
-    # order_id = request.session.get('order_id')
-    # order = get_object_or_404(Order, pk=order_id)
-    # amount = order.get_total_cost()
+    order_id = request.session.get('order_id')
+    order = get_object_or_404(Order, pk=order_id)
+    amount = order.get_total_cost()
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result.Status == 100:
-            return HttpResponse('Transaction success.\nRefID: ' + str(result.RefID))
+             return render(request, 'customer/order_created.html', {'order': order})
+            #  return HttpResponse('Transaction success.\nRefID: ' + str(result.RefID))
         elif result.Status == 101:
             return HttpResponse('Transaction submitted : ' + str(result.Status))
         else:
