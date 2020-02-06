@@ -5,7 +5,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.shortcuts import redirect,get_object_or_404
 from zeep import Client
-from customer.models import Order,OrderItem
+from customer.models import Order
 
 
 
@@ -16,10 +16,6 @@ description = "توضیحات مربوط به تراکنش را در این قس
 email = 'email@example.com'  # Optional
 mobile = '09123456789'  # Optional
 CallbackURL = 'http://localhost:8000/verify/' # Important: need to edit for realy server#
-# def get_price(request):
-#     order_id=request.session.get('order_id')
-#     order=get_object_or_404(Order,pk=order_id)
-#     return order.get_total_cost()
 
 def send_request(request):
     order_id=request.session.get('order_id')
