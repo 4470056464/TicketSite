@@ -21,6 +21,8 @@ class Order(models.Model):
     class Meta:
         ordering = ('-created',)
 
+
+
     def get_absolute_url(self):
         """
         Returns the url to access a particular book instance.
@@ -32,7 +34,8 @@ class Order(models.Model):
 
 
     def get_total_cost(self):
-        return sum(item.get_cost() for item in self.items.all())
+         return sum(item.get_cost() for item in self.items.all())
+
 
 
 
@@ -40,7 +43,8 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    price = models.DecimalField(max_digits=10, decimal_places=2)
+    order = models.ForeignKey(Order, related_name='items',on_delete=models.CASCADE,null=True)
+    price=models.PositiveIntegerField()
     quantity = models.PositiveIntegerField(default=1)
 
     def __str__(self):

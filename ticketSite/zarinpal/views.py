@@ -3,29 +3,38 @@ from django.shortcuts import render
 # -*- coding: utf-8 -*-
 # Github.com/Rasooll
 from django.http import HttpResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect,get_object_or_404
 from zeep import Client
-from cart.cart import Cart
+from customer.models import Order,OrderItem
+
+
 
 MERCHANT = '656b9330-8de3-11e9-b4f2-000c29344814'
 client = Client('https://www.zarinpal.com/pg/services/WebGate/wsdl')
-# amount = 1000  # Toman / Required
+# amount = 100  # Toman / Required
 description = "توضیحات مربوط به تراکنش را در این قسمت وارد کنید"  # Required
 email = 'email@example.com'  # Optional
 mobile = '09123456789'  # Optional
-CallbackURL = 'http://localhost:8000/verify/' # Important: need to edit for realy server.
+CallbackURL = 'http://localhost:8000/verify/' # Important: need to edit for realy server#
+# def get_price(request):
+#     order_id=request.session.get('order_id')
+#     order=get_object_or_404(Order,pk=order_id)
+#     return order.get_total_cost()
 
 def send_request(request):
-    cart = Cart(request)
-    for item in cart:
-        amount=item['total_price']
-    result = client.service.PaymentRequest(MERCHANT, amount, description, email, mobile, CallbackURL)
+    order_id=request.session.get('order_id')
+    order=get_object_or_404(Order,pk=order_id)
+    amount=order.get_total_cost()
+    result = client.service.PaymentRequest(MERCHANT,amount, description, email, mobile, CallbackURL)
     if result.Status == 100:
         return redirect('https://www.zarinpal.com/pg/StartPay/' + str(result.Authority))
     else:
         return HttpResponse('Error code: ' + str(result.Status))
 
 def verify(request):
+    # order_id = request.session.get('order_id')
+    # order = get_object_or_404(Order, pk=order_id)
+    # amount = order.get_total_cost()
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result.Status == 100:
