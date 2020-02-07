@@ -8,3 +8,6 @@ class PhonLoginForm(forms.Form):
         if not phone.exists():
             raise forms.ValidationError('this phone dose not exists')
         return self.cleaned_data['phone']
+
+class verifyCodeForm(forms.Form):
+    code=forms.IntegerField()

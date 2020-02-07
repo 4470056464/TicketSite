@@ -1,11 +1,14 @@
-from django.shortcuts import render, redirect,get_object_or_404
+import re
+
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages, auth
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from .forms import PhonLoginForm
+from django.urls import reverse
+
+from .forms import PhonLoginForm, verifyCodeForm
 from random import randint
 from kavenegar import *
-
 
 
 def login(request):
@@ -17,10 +20,10 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            messages.success(request, 'you are logged in','success')
+            messages.success(request, 'you are logged in', 'success')
             return redirect('product_list')
         else:
-            messages.error(request, 'نام کاریری یا رمزعبور اشتباه است','warning')
+            messages.error(request, 'نام کاریری یا رمزعبور اشتباه است', 'warning')
             return redirect('login')
 
     else:
@@ -50,17 +53,24 @@ def register(request):
         if password == password2:
 
             # check username
-            if User.objects.filter(username=username).exists():
-                messages.error(request, 'the username is token','warning')
+            rule = re.compile(r'(^09)[\d]{9}$')
+
+            if not rule.search(username):
+                messages.error(request, 'شماره موبایل معتبر نیسست', 'warning')
                 return redirect('register')
+            if User.objects.filter(username=username).exists():
+                messages.error(request, 'شما قبلن ثبت نام کرده اید', 'warning')
+                return redirect('register')
+
+
 
             else:
                 # LOOKS GOOD
                 user = User.objects.create_user(
-                    username=username, password=password, last_name=last_name ,first_name=first_name)#
+                    username=username, password=password, last_name=last_name, first_name=first_name)  #
                 # LOGIN AFTER REGISTER
                 user.save()
-                messages.success(request, 'you are register ','success')
+                messages.success(request, 'you are register ', 'success')
                 auth.login(request, user)
                 return redirect('product_list')
 
@@ -70,17 +80,17 @@ def register(request):
     else:
         return render(request, 'accounts/register.html')
 
+
 def dashboard(request):
-    return render(request, 'accounts/dashboard.html',)
+    return render(request, 'accounts/dashboard.html', )
 
 
 def PhoneLogin(request):
     if request.method == 'POST':
-        form=PhonLoginForm(request.POST)
+        form = PhonLoginForm(request.POST)
         if form.is_valid():
-
-            phone=form.cleaned_data['phone']
-            randNum=randint(1000,9999)
+            phone = form.cleaned_data['phone']
+            randNum = randint(1000, 9999)
 
             # try:
             #     api = KavenegarAPI('4B4C594D2B716F366F6938686B4165732B6D54564F3979476F70642F68706A7863365445762F7A75636A453D')
@@ -99,7 +109,27 @@ def PhoneLogin(request):
             # except HTTPException as e:
             #     print
             #     str(e)
-        pass
+            return redirect('verifyCode', phone, randNum)
+
     else:
-        form=PhonLoginForm()
-    return render(request,'accounts/PhoneLogin.html',{'form':form})
+        form = PhonLoginForm()
+    return render(request, 'accounts/PhoneLogin.html', {'form': form})
+
+
+def verify_code(request, phone, randNum):
+    if request.method == 'POST':
+        form = verifyCodeForm(request.POST)
+        if form.is_valid():
+            if randNum == form.cleaned_data['code']:
+                username = f"0{phone}"
+                user = get_object_or_404(User,username=username)
+
+                auth.login(request, user)
+                messages.success(request, 'you are logged in', 'success')
+                return redirect('product_list')
+            else:
+                messages.success(request, 'کد وارد شده نادرست است', 'warning')
+                return redirect('verifyCode', phone, randNum)
+    else:
+        form = verifyCodeForm()
+        return render(request, 'accounts/verifyCode.html', {'form': form})
