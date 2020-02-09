@@ -13,7 +13,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import export as export
+
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'accounts',
     'zarinpal',
     'wkhtmltopdf',
-    'phonenumber_field',
 ]
 
 MIDDLEWARE = [
@@ -130,11 +129,13 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'ticketSite/static'),
 ]
-STATIC_ROOT = 'ticketSite/static/wkhtml2pdf/bin/wkhtmltopdf.exe'
-# # exportWKHTMLTOPDF_CMD='C:/Program files/wkhtmltopdf/bin/wkhtmltopdf.exe'
-# WKHTMLTOPDF_CMD_OPTIONS = {
-#     'quiet': True,ticketSite\static\wkhtml2pdf
-# }
+# STATIC_ROOT = 'ticketSite/static/wkhtml2pdf'
+WKHTMLTOPDF_CMD = 'C:/wkhtmltopdf/bin/wkhtmltopdf'
+
+WKHTMLTOPDF_CMD_OPTIONS = {
+    'quiet': True,
+}
+
 
 
 from django.contrib.messages import constants as messages
@@ -148,7 +149,6 @@ MESSAGE_TAGS = {
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-PAYPAL_RECEIVER_EMAIL = 'sonalis.paktpub-test1@gmail.com'
-PAYPAL_TEST = True
+
 
 CART_SESSION_ID = 'cart'

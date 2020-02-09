@@ -63,10 +63,10 @@ def order_create(request):
 
         cart.clear()
         # order_created.delay(order.id)
-        request.session['order_id']=order.id
-        return redirect(reverse('request'))
+        # request.session['order_id']=order.id
+        # return redirect(reverse('request'))
 
-        # return render(request, 'customer/order_created.html', {'order': order, 'cart': cart})
+        return render(request, 'customer/order_created.html', {'order': order, 'cart': cart})
 
             #
 
