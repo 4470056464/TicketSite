@@ -34,7 +34,7 @@
         </button>
 
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="-webkit-overflow-scrolling: touch">
  <form class="form-inline" action="{% url 'cart_add' product.id%}" method="POST">
 
     {% csrf_token%}

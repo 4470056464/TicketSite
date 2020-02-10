@@ -208,7 +208,7 @@ body {
 
             <div  style="margin-right: 102%;" >
 
-                <td> <img src="{%if ticket.generate_qrcode%}{{ ticket.qrcode.url }}{%else%}{{ ticket.qrcode.url }} {%endif%}"></td>
+                 <img src="{%if ticket.generate_qrcode%}{{ ticket.qrcode.url }}{%else%}{{ ticket.qrcode.url }} {%endif%}">
             </div>
 
         {%endfor%}

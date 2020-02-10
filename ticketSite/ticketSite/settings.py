@@ -130,8 +130,8 @@ STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'ticketSite/static'),
 ]
 # STATIC_ROOT = 'ticketSite/static/wkhtml2pdf'
-WKHTMLTOPDF_CMD = 'C:/wkhtmltopdf/bin/wkhtmltopdf'
-
+# WKHTMLTOPDF_CMD = 'C:/wkhtmltopdf/bin/wkhtmltopdf'
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 WKHTMLTOPDF_CMD_OPTIONS = {
     'quiet': True,
 }

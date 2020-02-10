@@ -1,4 +1,5 @@
 from binascii import Error
+
 from django.db import transaction, IntegrityError
 from django.db.models import F
 from django.shortcuts import render, get_object_or_404,redirect
@@ -7,7 +8,6 @@ from django.views.generic.base import View
 from wkhtmltopdf.views import PDFTemplateResponse
 from .models import OrderItem, Ticket, Order
 from kavenegar import *
-
 
 # from .tasks import order_created
 from cart.cart import Cart
@@ -95,7 +95,6 @@ class ticket_pdf(View):
                                                     "no-stop-slow-scripts": True},
                                        )
         return response
-
 
 
 

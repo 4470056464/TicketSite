@@ -4869,10 +4869,10 @@ body.modal-open,
   overflow: auto;
   overflow-y: scroll;
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 3%;
+  right: 3%;
   bottom: 0;
-  left: 0;
+  left: 3%;
   z-index: 1040;
 }
 .modal.fade .modal-dialog {
@@ -4939,6 +4939,8 @@ body.modal-open,
 .modal-body {
   position: relative;
   padding: 20px;
+  height: 60%;
+  -webkit-overflow-scrolling: touch;
 }
 .modal-footer {
   margin-top: 15px;
