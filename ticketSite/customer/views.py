@@ -13,7 +13,6 @@ from kavenegar import *
 # from .tasks import order_created
 from cart.cart import Cart
 
-from .pdf import get_pdf
 
 
 def order_create(request):
