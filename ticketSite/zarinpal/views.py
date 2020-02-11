@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import redirect,get_object_or_404
 from zeep import Client
 from customer.models import Order
+from kavenegar import *
 
 
 
@@ -34,7 +35,25 @@ def verify(request):
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result.Status == 100:
-             return render(request, 'customer/order_created.html', {'order': order})
+
+            api = KavenegarAPI('4B4C594D2B716F366F6938686B4165732B6D54564F3979476F70642F68706A7863365445762F7A75636A453D')
+            params = {
+                    'sender': '',
+                    'receptor': f"{order.phone}",
+                    'message': f"{order.id} \n میلاد زینلی \n 456156 "
+                        }
+            response = api.sms_send(params)
+            print
+            str(response)
+            return render(request, 'customer/order_created.html', {'order': order})
+
+
+            # except APIException as e:
+            #     print
+            #     str(e)
+            # except HTTPException as e:
+            #     print
+            #     str(e)
             #  return HttpResponse('Transaction success.\nRefID: ' + str(result.RefID))
         elif result.Status == 101:
             return HttpResponse('Transaction submitted : ' + str(result.Status))

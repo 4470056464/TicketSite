@@ -1,0 +1,27 @@
+
+@media print {
+ .visible-print {
+    display: block !important;
+  }
+    @page {
+        margin: 0.5cm;
+    }
+    #print-button { display: none; }
+  tr.visible-print {
+    display: table-row !important;
+  }
+  th.visible-print,
+  td.visible-print {
+    display: table-cell !important;
+  }
+   .hidden-print {
+    display: none !important;
+  }
+  tr.hidden-print {
+    display: none !important;
+  }
+  th.hidden-print,
+  td.hidden-print {
+    display: none !important;
+  }
+}
