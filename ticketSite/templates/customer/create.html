@@ -41,6 +41,12 @@
             <div class="panel-heading">
               <div class="panel-title">نشخصات خریدار</div>
             </div>
+                          <div class="panel-body" >
+              <div id="signupalert" style="display:none" class="alert alert-danger">
+                                    <p>Error:</p>
+                                    <span></span>
+                                </div>
+               {% include 'partial/_alerts.html'%}
     <form  class="form-horizontal" role="form" action="{%url 'order_create'  %}" method="POST">
           {% csrf_token%}
 <!--        {{form.as_table}}-->
@@ -81,6 +87,7 @@
 
     
   </div>
+          </div>
 </div>
 </div>
 </div>
