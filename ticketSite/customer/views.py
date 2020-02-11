@@ -81,20 +81,20 @@ class ticket_pdf(View):
     def get(self, request,*args, **kwargs):
         order = get_object_or_404(Order, pk=kwargs['order_id'])
         context = {'order': order}
-
-        response = PDFTemplateResponse(request=request,
-                                       template=self.template,
-                                       filename="hello.pdf",
-                                       context=context,
-                                       show_content_in_browser=False,
-                                       cmd_options={'margin-top': 10,
-                                                    "zoom": 1,
-                                                    "viewport-size": "1366 x 513",
-                                                    'javascript-delay': 1000,
-                                                    'footer-center': '[page]/[topage]',
-                                                    "no-stop-slow-scripts": True},
-                                       )
-        return response
+        return render(request,'pdf.html',context)
+        # response = PDFTemplateResponse(request=request,
+        #                                template=self.template,
+        #                                filename="hello.pdf",
+        #                                context=context,
+        #                                show_content_in_browser=False,
+        #                                cmd_options={'margin-top': 10,
+        #                                             "zoom": 1,
+        #                                             "viewport-size": "1366 x 513",
+        #                                             'javascript-delay': 1000,
+        #                                             'footer-center': '[page]/[topage]',
+        #                                             "no-stop-slow-scripts": True},
+        #                                )
+        # return response
 
 
 

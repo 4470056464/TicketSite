@@ -86,9 +86,9 @@ class Ticket(models.Model):
         buffer = BytesIO()
 
         img.save(buffer)
-        filename = 'tickets-%s.png' % (self.id)
+        filename = 'tickets-%s.jpg' % (self.id)
         filebuffer = InMemoryUploadedFile(
-            buffer, None, filename, 'image/png',buffer.getbuffer().nbytes, None)
+            buffer, None, filename, 'image/jpg',buffer.getbuffer().nbytes, None)
         self.qrcode.save(filename, filebuffer)
 
 
