@@ -68,7 +68,8 @@ class Ticket(models.Model):
 
 
     def get_data(self):
-        return f"q{self.quantity} \n {self.order} \n p{self.product}"
+        num= int(self.id) + 10
+        return f"q{self.quantity} \n {num} as \n p{self.product}"
 
 
     def generate_qrcode(self):

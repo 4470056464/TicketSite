@@ -23,7 +23,22 @@
   </div>
 </div>
   {% if user.is_authenticated%}
+<<<<<<< HEAD
  <div class="row">
+=======
+    <button type="button" class="btn btn-info btn-md " data-toggle="modal" data-target="#myModal">تهیه ی بلیط</button>
+<div class="modal fade" id="myModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title"> ticket</h5>
+        <button type="button" class="close" data-dismis="modal">
+          <span>&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body" style="-webkit-overflow-scrolling: touch">
+>>>>>>> one
  <form class="form-inline" action="{% url 'cart_add' product.id%}" method="POST">
 
     {% csrf_token%}

@@ -181,7 +181,7 @@
         </div>
         <div class="row ">
         <div class="col-md-12 ">
-            <table class="table-bordered" style="width: 100%">
+            <table class="table-bordered" style="width: 63%;" >
                 <thead>
 
                 <tr>
@@ -192,12 +192,12 @@
                         تعداد بلیط
                     </th>
                     <th>کد ملی</th>
-                    <th>قیمت بلیط</th>
+
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
-                    <td>{{order.id}}</td>
+                    <td>{{ticket.id}}</td>
                     <td>{{ticket.quantity}}</td>
                     <td>{{order.national}}</td>
                 </tr>
@@ -207,9 +207,13 @@
         </div>
 
 
+
             <div style="margin-right: 111%" >
 <!--                {{ticket.generate_qrcode}}&ndash;&gt;-->
              <td> <img src="{%if ticket.generate_qrcode%}{{ ticket.qrcode.url }}{%else%}{{ ticket.qrcode.url }}{%endif%}"></td>
+
+                 <img src="{%if ticket.generate_qrcode%}{{ ticket.qrcode.url }}{%else%}{{ ticket.qrcode.url }} {%endif%}">
+
             </div>
         {%endfor%}
         </div>
@@ -270,6 +274,7 @@
 
 <!--</div>-->
 <!--</div>-->
+</div>
 </body>
 </html>
 

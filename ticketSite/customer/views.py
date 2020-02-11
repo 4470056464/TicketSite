@@ -1,16 +1,19 @@
 from binascii import Error
+
 from django.db import transaction, IntegrityError
 from django.db.models import F
 from django.shortcuts import render, get_object_or_404,redirect
+from django.template.loader import get_template
 from django.urls import reverse
 from django.views.generic.base import View
 from wkhtmltopdf.views import PDFTemplateResponse
 from .models import OrderItem, Ticket, Order
 from kavenegar import *
 
-
 # from .tasks import order_created
 from cart.cart import Cart
+
+from .pdf import get_pdf
 
 
 def order_create(request):
@@ -63,10 +66,10 @@ def order_create(request):
 
         cart.clear()
         # order_created.delay(order.id)
-        # request.session['order_id']=order.id
-        # return redirect(reverse('request'))
+        request.session['order_id']=order.id
+        return redirect(reverse('request'))
 
-        return render(request, 'customer/order_created.html', {'order': order, 'cart': cart})
+        # return render(request, 'customer/order_created.html', {'order': order, 'cart': cart})
 
             #
 
@@ -95,7 +98,6 @@ class ticket_pdf(View):
         #                                             "no-stop-slow-scripts": True},
         #                                )
         # return response
-
 
 
 
