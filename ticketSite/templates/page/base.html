@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Modern Business - Start Bootstrap Template</title>
+    <title>شادی آفرینان</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{%  static 'css/bootstrap-rtl.css' %}" rel="stylesheet">
@@ -63,7 +63,7 @@
 
             <ul class="dropdown-menu">
                 <li><a href="{% url 'dashboard'%}" >
-                    <i class="glyphicon glyphicon-list-alt"></i> بلیط های شما</a>
+                    <i class="glyphicon glyphicon-list-alt" style="margin-left:3px "></i> بلیط های شما</a>
 
                 </li>
 
@@ -71,7 +71,7 @@
                     <form action="{% url 'logout'%}" method="POST">
                         {%csrf_token %}
                         <input type="hidden">
-                        <button type="submit" style="border: none;background-color: white; margin-right: 10px" > <i class="glyphicon glyphicon-log-out"></i>خروج</button>
+                        <button type="submit" style="border: none;background-color: white; margin-right: 10px" > <i class="glyphicon glyphicon-log-out" style="margin-left:3px"></i>خروج</button>
                         <!--                        <input type="submit" value="خروج" style="" >-->
 
                     </form>

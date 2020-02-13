@@ -157,11 +157,11 @@
 </head>
 <body>
 <div class="container">
-    <div class="col-md-8 col-md-offset-2"  style="margin-top: 40px;border-style: solid">
+    <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1 "  style="margin-top: 40px;border-style: solid">
 
         {%for ticket in order.ticket_set.all %}
             {% with product=ticket.product %}
-        <div class="col-md-10">
+        <div class="col-md-10  col-xs-12  col-sm-10   ">
         <div class="row">
         <div class="col-md-4">
             <p>کنسرت {{product.name}}</p>
@@ -206,20 +206,16 @@
         </div>
         </div>
 
+        </div>
 
-
-            <div style="margin-right: 111%" >
+            <div class="col-xs-12 col-md-2 col-md-offset-12 col-sm-2 col-sm-offset-12 " style="margin-top: 20%; " >
 <!--                {{ticket.generate_qrcode}}&ndash;&gt;-->
-             <td> <img src="{%if ticket.generate_qrcode%}{{ ticket.qrcode.url }}{%else%}{{ ticket.qrcode.url }}{%endif%}"></td>
-
-                 <img src="{%if ticket.generate_qrcode%}{{ ticket.qrcode.url }}{%else%}{{ ticket.qrcode.url }} {%endif%}">
-
+              <img class="clearfix" src="{%if ticket.generate_qrcode%}{{ ticket.qrcode.url }}{%else%}{{ ticket.qrcode.url }}{%endif%}">
             </div>
         {%endfor%}
         </div>
 
-    </div>
-     <div class="col-md-8 col-md-offset-2"  style="margin-top: 10px;border-style:dashed">
+     <div class="col-md-10 col-md-offset-1 col-xs-10 col-xs-offset-1  col-sm-10 col-sm-offset-1 "  style="margin-top: 10px;border-style:dashed">
                 <p>
                     حتما باید مشخصات یکی از همراهان با مشخصات روی بلیط یکسان باشد
                     ستاد اجرایی از ورود افرادی که غیر از سایت www.concert.ir بلیط تهیه نمایند جلوگیری میکند.
