@@ -1,6 +1,5 @@
 import re
 from binascii import Error
-
 from django.contrib import messages
 from django.db import transaction, IntegrityError
 from django.db.models import F
@@ -22,7 +21,6 @@ def order_create(request):
 
     if request.method == 'POST':
         name = request.POST['name']
-        # last_name = request.POST['last_name']
         phone = request.POST['phone']
         national = request.POST['national']
         rule = re.compile(r'(^09)[\d]{9}$')
@@ -42,47 +40,22 @@ def order_create(request):
             try:
                 with transaction.atomic():
                     product = item['product']
-                    product.capacity = F('capacity') - item['quantity']
+                    product.capacity = F('capacity') - 1
                     product.save(update_fields=['capacity'])
             except IntegrityError:
                 raise Error
                 #  return redirect('product_detail')
             OrderItem.objects.create( order=order,price=item['price'], quantity=item['quantity'])
             Ticket.objects.create(user=user,
-                                      order=order, product=item['product'],quantity=item['quantity'])
-            # Phone=f"0{phone}"
-            #
-            # try:
-            #     api = KavenegarAPI('4B4C594D2B716F366F6938686B4165732B6D54564F3979476F70642F68706A7863365445762F7A75636A453D')
-            #     params = {
-            #         'sender': '',
-            #         'receptor': f"{phone}",
-            #         'message': f"بلیط کنسرت {product.name}   \n شماره بلیط:{order.id} \n میلاد زینلی \n 456156 "
-            #             }
-            #     response = api.sms_send(params)
-            #     print
-            #     str(response)
-            #
-            # except APIException as e:
-            #     print
-            #     str(e)
-            # except HTTPException as e:
-            #     print
-            #     str(e)
-
+                                    order=order, product=item['product'],quantity=item['quantity'])
         cart.clear()
         # order_created.delay(order.id)
         # request.session['order_id']=order.id
         # return redirect(reverse('request'))
-
         return render(request, 'customer/order_created.html', {'order': order, 'cart': cart})
-
-            #
-
     else:
         return render(request, 'customer/create.html', {
-        'cart': cart, })
-        # 'form': form
+        'cart': cart})
 
 class ticket_pdf(View):
     template='pdf.html' # the template
