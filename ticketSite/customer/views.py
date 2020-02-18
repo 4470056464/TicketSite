@@ -3,17 +3,17 @@ from binascii import Error
 from django.contrib import messages
 from django.db import transaction, IntegrityError
 from django.db.models import F
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404,redirect
-from django.template.loader import get_template
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.views.generic.base import View
 from wkhtmltopdf.views import PDFTemplateResponse
 from .models import OrderItem, Ticket, Order
 from kavenegar import *
-
 # from .tasks import order_created
 from cart.cart import Cart
-
+from fpdf import FPDF, HTMLMixin
 
 
 def order_create(request):
@@ -50,12 +50,16 @@ def order_create(request):
                                     order=order, product=item['product'],quantity=item['quantity'])
         cart.clear()
         # order_created.delay(order.id)
-        # request.session['order_id']=order.id
-        # return redirect(reverse('request'))
-        return render(request, 'customer/order_created.html', {'order': order, 'cart': cart})
+        request.session['order_id']=order.id
+        return redirect(reverse('request'))
+        # return render(request, 'customer/order_created.html', {'order': order, 'cart': cart})
     else:
         return render(request, 'customer/create.html', {
         'cart': cart})
+
+
+class HtmlPdf(FPDF, HTMLMixin):
+    pass
 
 class ticket_pdf(View):
     template='pdf.html' # the template
@@ -63,20 +67,21 @@ class ticket_pdf(View):
     def get(self, request,*args, **kwargs):
         order = get_object_or_404(Order, pk=kwargs['order_id'])
         context = {'order': order}
-        # return render(request,'pdf.html',context)
-        response = PDFTemplateResponse(request=request,
-                                       template=self.template,
-                                       filename="hello.pdf",
-                                       context=context,
-                                       show_content_in_browser=False,
-                                       cmd_options={'margin-top': 10,
-                                                    "zoom": 1,
-                                                    "viewport-size": "1366 x 513",
-                                                    'javascript-delay': 1000,
-                                                    'footer-center': '[page]/[topage]',
-                                                    "no-stop-slow-scripts": True},
-                                       )
-        return response
+
+        return render(request,'pdf.html',context)
+        # response = PDFTemplateResponse(request=request,
+        #                                template=self.template,
+        #                                filename="hello.pdf",
+        #                                context=context,
+        #                                show_content_in_browser=False,
+        #                                cmd_options={'margin-top': 10,
+        #                                             "zoom": 1,
+        #                                             "viewport-size": "1366 x 513",
+        #                                             'javascript-delay': 1000,
+        #                                             'footer-center': '[page]/[topage]',
+        #                                             "no-stop-slow-scripts": True},
+        #                                )
+        # return response
 
 
 

@@ -1,32 +1,30 @@
 {%extends 'page/base.html'%}
 {% load static %}
-{% block content %}
+{% block content %}<div class="container">
 {% if user.is_authenticated%}
            {%for ticket in user.ticket_set.all%}
 {% with order=ticket.order %}
            {% with product=ticket.product %}
-<div class="row col-md-4 col-md-offset-4" style="margin-top: 40px;">
+
+<div class="row col-md-6 col-md-offset-3" style="margin-top: 40px;">
  <table class="table table-bordered ">
-        <thead style="background-color: #4CAF50">
+        <thead>
             <tr>
-                <th>نام</th>
-                <th>نام خانوادگی</th>
-                <th>تعدادبلیط</th>
                 <th>کنسرت</th>
+                <th>نام و نام خانوادگی</th>
+                <th>تعدادبلیط</th>
                  <th>شماره بلیط</th>
-                <th>چاپ</th>
             </tr>
         </thead>
       <tbody>
 
             <tr>
-                <td>{{order.firstName}}</td>
-                <td>{{order.lastName}}</td>
-                <td>{{ticket.quantity}}</td>
                 <td>{{product.name}}</td>
+                <td>{{order.name}}</td>
+                <td>{{ticket.quantity}}</td>
                 <td>{{order.id}}</td>
                 <th><a href="{{ order.get_absolute_url }}">
-             چاپ
+             دریافت بلیط
          </a></th>
             </tr>
  </tbody>
@@ -36,5 +34,5 @@
             {%endwith%}
 {%endfor%}
 
-{%endif%}
+{%endif%}</div>
 {%endblock%}

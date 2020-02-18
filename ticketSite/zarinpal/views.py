@@ -7,7 +7,8 @@ from django.shortcuts import redirect,get_object_or_404
 from zeep import Client
 from customer.models import Order
 from kavenegar import *
-
+# from django.core.signals import request_finished
+# from .signal import payment_order
 
 
 MERCHANT = '656b9330-8de3-11e9-b4f2-000c29344814'
@@ -35,7 +36,8 @@ def verify(request):
     if request.GET.get('Status') == 'OK':
         result = client.service.PaymentVerification(MERCHANT, request.GET['Authority'], amount)
         if result.Status == 100:
-
+            order.paid=True
+            order.save()
             api = KavenegarAPI('4B4C594D2B716F366F6938686B4165732B6D54564F3979476F70642F68706A7863365445762F7A75636A453D')
             params = {
                     'sender': '',
