@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>شادی آفرینان</title>
+    <title>Modern Business - Start Bootstrap Template</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{%  static 'css/bootstrap-rtl.css' %}" rel="stylesheet">
@@ -19,7 +19,7 @@
     <link href="{%  static 'css/modern-business.css' %}" rel="stylesheet">
 
     <!-- Custom Fonts -->
-<!--    <link href="{%  static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">-->
+    <link href="{%  static 'font-awesome/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
     <!-- <link href="{%  static 'css/account.css' %}" rel="stylesheet"> -->
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -53,7 +53,7 @@
                     <ul class="nav navbar-nav">
                         <li class="active"><a href="{%url 'product_list'%}">صفحه ي اصلي<span class="sr-only">(current)</span></a></li>
                         <li><a href="">درباره ي ما</a></li>
-                        <li> <a href="{%url 'contact'%}">تماس با ما</a> </li>
+                        <li> <a href="">تماس با ما</a> </li>
                     </ul>
                     {% if user.is_authenticated%}
                     <ul class="nav navbar-nav navbar-left">
@@ -62,16 +62,12 @@
                             {{user.first_name}} <i class="caret  navbar-btn"></i></a>
 
             <ul class="dropdown-menu">
-                <li><a href="{% url 'dashboard'%}" >
-                    <i class="glyphicon glyphicon-list-alt" style="margin-left:3px "></i> بلیط های شما</a>
-
-                </li>
-
+                <li><a href="{% url 'dashboard'%}">بلیط های شما</a></li>
                 <li>
                     <form action="{% url 'logout'%}" method="POST">
                         {%csrf_token %}
                         <input type="hidden">
-                        <button type="submit" style="border: none;background-color: white; margin-right: 10px" > <i class="glyphicon glyphicon-log-out" style="margin-left:3px"></i>خروج</button>
+                        <button type="submit" style="border: none;background-color: white" > <i class="glyphicon glyphicon-log-out"></i>خروج</button>
                         <!--                        <input type="submit" value="خروج" style="" >-->
 
                     </form>
@@ -99,14 +95,14 @@
             </div>
             <!-- /.container -->
         </nav>
-<!--                <div class="container-fluid " style="height: max-content">-->
-<!--        <div class="row " style="background-color: #d58512" >-->
-<!--<h1 class="col-md-4 col-md-offset-4">-->
-<!--    شرکت شادی آفرینان ایران-->
-<!--</h1>-->
+                <div class="container-fluid " style="height: max-content">
+        <div class="row " style="background-color: #d58512" >
+<h1 class="col-md-4 col-md-offset-4">
+    شرکت شادی آفرینان ایران
+</h1>
 
-<!--        </div>-->
-<!--</div>-->
+        </div>
+</div>
     </header>
 
     <!-- Header Carousel -->
@@ -115,19 +111,19 @@
         <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
             <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            <li data-target="carousel-example-generic" data-slide-to="2"></li>
         </ol>
 
         <!-- Wrapper for slides -->
         <div class="carousel-inner">
             <div class="item active">
-                <img src="{%  static 'img/header4.jpg' %}" style="width: 100%;" alt="...">
+                <img src="{%  static 'img/header1.jpg' %}" style="width: 100%;" alt="...">
             </div>
             <div class="item">
-                <img src="{%  static 'img/header5.jpg' %}" style="width: 100%; " alt="...">
+                <img src="{%  static 'img/header2.jpg' %}" style="width: 100%;" alt="...">
             </div>
             <div class="item">
-                <img src="{%  static 'img/header6.jpg' %}" style="width: 100%;" alt="...">
+                <img src="{%  static 'img/جنگ شادی.jpg' %}" style="width: 100%;" alt="...">
             </div>
 
         </div>
@@ -142,25 +138,24 @@
         <hr>
 
         <!-- Call to Action Section -->
-        <div class="container">
         <div class="well">
             <div class="row">
-                <div class="col-lg-12">
-                    <p style="text-align: justify;line-height: 1.8">شرکت کسب و کار نوین ایرانیان که با فعالیت در حوزه کسب و کار الکترونیک شناخته شده است، با هدف ایجاد سامانه خرید آنلاین بلیط رویدادهای فرهنگی، هنری، اجتماعی، ورزشی در بهمن ماه سال 93 با راه اندازی سایت اینترنتی www.Tik8.com مأموریت جدید خود را آغاز کرده است. تیکت با فراهم ساختن بستر مناسب با ساختاری نوین و عملکرد آسان امکان خرید آنلاین بلیط رویدادهای هنری شامل تئاتر، سینما، کنسرت، رویدادهای علمی شامل کنفرانس، همایش و رویدادهای ورزشی مختلف را برای مخاطبان گرامی ایجاد کرده است. از طریق وب سایت و اپلیکیشن تیکت بلیط رویداد مورد نظرتان را فقط در چند مرحله ساده با کوتاهترین زمان خریداری کنید. تیکت با رویکرد حمایت از علاقمندان به حضور در رویدادهای هنری، علمی و ورزشی در مسیر آسان تر نمودن تجربه سرگرمی برای اقشار مختلف، تصمیم دارد با ایجاد شرایط متنوع، امکان حضور علاقمندان را به جذاب ترین شیوه ها فراهم سازد..</p>
+                <div class="col-md-8">
+                    <p>شرکت کسب و کار نوین ایرانیان که با فعالیت در حوزه کسب و کار الکترونیک شناخته شده است، با هدف ایجاد سامانه خرید آنلاین بلیط رویدادهای فرهنگی، هنری، اجتماعی، ورزشی در بهمن ماه سال 93 با راه اندازی سایت اینترنتی www.Tik8.com مأموریت جدید خود را آغاز کرده است. تیکت با فراهم ساختن بستر مناسب با ساختاری نوین و عملکرد آسان امکان خرید آنلاین بلیط رویدادهای هنری شامل تئاتر، سینما، کنسرت، رویدادهای علمی شامل کنفرانس، همایش و رویدادهای ورزشی مختلف را برای مخاطبان گرامی ایجاد کرده است. از طریق وب سایت و اپلیکیشن تیکت بلیط رویداد مورد نظرتان را فقط در چند مرحله ساده با کوتاهترین زمان خریداری کنید. تیکت با رویکرد حمایت از علاقمندان به حضور در رویدادهای هنری، علمی و ورزشی در مسیر آسان تر نمودن تجربه سرگرمی برای اقشار مختلف، تصمیم دارد با ایجاد شرایط متنوع، امکان حضور علاقمندان را به جذاب ترین شیوه ها فراهم سازد..</p>
                 </div>
-<!--                <div class="col-md-4">-->
-<!--                    <a class="btn btn-lg btn-default btn-block" href="#">Call to Action</a>-->
-<!--                </div>-->
+                <div class="col-md-4">
+                    <a class="btn btn-lg btn-default btn-block" href="#">Call to Action</a>
+                </div>
             </div>
         </div>
-</div>
+
         <hr>
 
         <!-- Footer -->
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <img src="{%  static 'img/header4.jpg' %}" style="width: 100%;" alt="...">
+                    <p>Copyright &copy; Your Website 2014</p>
                 </div>
             </div>
         </footer>

@@ -1,52 +1,41 @@
 {%extends 'page/base.html'%}
 {% load static %}
-{% load humanize%}
 {% block content %}
-<div class="container">
-<div class=" col-md-8 col-md-offset-2 col-xs-12 col-xs-offset-0 col-sm-10 col-sm-offset-1" style="margin-top: 40px; margin-bottom: 200px">
-    <table class="table table-bordered " style="margin-bottom: 5px">
+
+
+<div class="row " style="margin-top: 40px;">
+
+    <table class="table table-bordered" style="margin-bottom: 200px">
         <thead style="background-color: #a6e1ec;">
             <tr>
                 <th>کنسرت</th>
-
-                <th>زمان</th>
-                <th>مکان</th>
                 <th>تعداد بلیط</th>
                 <th>بهای بلیط</th>
                 <th>بهای کل</th>
-
-                <th>حذف</th>
+                <th>مکان</th>
+                <th></th>
             </tr>
         </thead>
-        {% for item in cart %}
-        {% with product=item.product %}
-
-    <tbody>
-            <tr >
+        <tbody>
+            {% for item in cart %}
+            {% with product=item.product %}
+            <tr>
                 <td>{{product.name}}</td>
-                <td>{{product.zaman}}</td>
-                <td>{{product.makan}}</td>
                 <td>{{item.quantity}}</td>
+                <td>{{item.price}}</td>
+                <td>{{item.total_price}}</td>
+                <td>{{product.makan}}</td>
+                <td> <div class=" btn " style="font-size: 30px">
+        <a href="{%url 'order_create' %}">
+          تایید
+        </a></div></td>
+            </tr>
 
-                <td>{{item.price | intcomma}} تومان</td>
-
-                <td>{{item.total_price | intcomma}} تومان</td>
-
-
-                <td><a href="{%url 'cart_remove' product.id %}">حذف</a> </td></tr>
             {%endwith%}
             {%endfor%}
-            <tr>
-                <td>بهای کل </td>
-                <td colspan="4"></td>
-                <td>{{cart.get_total_price | intcomma}} تومان</td>
-            </tr>
         </tbody>
     </table>
-    <p class="text-center" style="font-size: 30px; margin-top:2px">
-        <a href="{%url 'order_create' %}" class="button">
-          تایید
-        </a></p>
-</div>
-</div>
+
+
+   
 {%endblock%}

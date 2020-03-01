@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.humanize',
     'shop',
     'customer',
     'cart',
@@ -130,13 +129,12 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS=[
     os.path.join(BASE_DIR,'ticketSite/static'),
 ]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # STATIC_ROOT = 'ticketSite/static/wkhtml2pdf'
 # WKHTMLTOPDF_CMD = 'C:/wkhtmltopdf/bin/wkhtmltopdf'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-# WKHTMLTOPDF_CMD_OPTIONS = {
-#     'quiet': True,
-# }
+WKHTMLTOPDF_CMD_OPTIONS = {
+    'quiet': True,
+}
 
 
 

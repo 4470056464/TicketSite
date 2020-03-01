@@ -7,4 +7,4 @@ class OrderCreateForm(forms.ModelForm):
     class Meta:
         model = Order
         fields = ['name', 'phone', 'national']
-        # labels={'name':'نام ونام خانوادگی','phone':'تلفن همراه','national':'کدملی'}
+        labels={'name':'نام ونام خانوادگی','phone':'تلفن همراه','national':'کدملی'}
